@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--
+ init-method：一个实例实例化之后立马执行的方法
+ scope:   springbean的范围（实例创建一种策略）
+ 常用值：  singleton :单例（spring管理范围之内是单例）
+        prototype:原型的含义，要一个就新创一个
+        depends-on:
+        依赖于某个bean,那么depends-on后面的bean将优先注册
+        parent:
+        可以指定要继承某个bean的一些属性
+
+
+-->
+
+<bean class="com.sz.news.bean.Book" id="book" init-method="init" scope="singleton"
+              destroy-method="destory">
+        <property name="name" value="数据库十大原则"/>
+        <property name="price" value="3.5"/>
+</bean>
+
+        <bean class="com.sz.news.bean.Book" id="book2" init-method="init" scope="prototype">
+                <property name="name" value="水月洞天"/>
+                <property name="price" value="3.5"/>
+        </bean>
+
+        <bean class="com.sz.news.bean.Food" id="food" depends-on="fire">
+                <property name="name" value="南瓜"/>
+        </bean>
+
+        <bean  class="com.sz.news.bean.Fire" id="fire">
+                <property name="name" value="三昧真火"/>
+        </bean>
+
+        <bean class="com.sz.news.bean.Book" id="b6">
+                <property name="name" value="SpringMVC"/>
+        </bean>
+        <bean class="com.sz.news.bean.Book" id="b7" parent="b6">
+                <property name="price" value="200"/>
+        </bean>
+
+</beans>
